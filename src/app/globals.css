@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;700;900&display=swap');
+
+@theme inline {
+  --color-mystic-50: #f0f0ff;
+  --color-mystic-100: #e0dfff;
+  --color-mystic-200: #c4bfff;
+  --color-mystic-300: #a68eff;
+  --color-mystic-400: #8b5cf6;
+  --color-mystic-500: #7c3aed;
+  --color-mystic-600: #6d28d9;
+  --color-mystic-700: #5b21b6;
+  --color-mystic-800: #1e1b4b;
+  --color-mystic-900: #0f0d2e;
+  --color-mystic-950: #08061a;
+  --color-gold-400: #f0c060;
+  --color-gold-500: #d4a843;
+  --color-gold-600: #b8922a;
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', serif;
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-mystic-700) transparent;
+}
+
+body {
+  background: var(--color-mystic-950);
+  color: white;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- reusable component classes ---- */
+
+.card-mystic {
+  background: color-mix(in srgb, var(--color-mystic-900) 80%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--color-mystic-700) 50%, transparent);
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, var(--color-mystic-500), var(--color-mystic-600));
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--color-mystic-400), var(--color-mystic-500));
+}
+.btn-primary:active {
+  transform: scale(0.95);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  border: 1px solid color-mix(in srgb, var(--color-mystic-600) 50%, transparent);
+  color: var(--color-mystic-300);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover {
+  background: color-mix(in srgb, var(--color-mystic-800) 50%, transparent);
+  border-color: var(--color-mystic-500);
+}
+
+.input-mystic {
+  width: 100%;
+  background: color-mix(in srgb, var(--color-mystic-900) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-mystic-700) 50%, transparent);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  outline: none;
+  transition: all 0.2s;
+}
+.input-mystic::placeholder {
+  color: var(--color-mystic-500);
+}
+.input-mystic:focus {
+  border-color: var(--color-mystic-500);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-mystic-500) 50%, transparent);
+}
+
+.pillar-box {
+  composes: card-mystic;
+  padding: 1rem;
+  text-align: center;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pillar-stem {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-mystic-300);
+  font-family: var(--font-serif);
+}
+
+.pillar-branch {
+  font-size: 1.125rem;
+  color: var(--color-mystic-400);
+  font-family: var(--font-serif);
+}
+
+.pillar-label {
+  font-size: 0.75rem;
+  color: var(--color-mystic-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tab-active {
+  color: var(--color-mystic-300);
+  border-bottom: 2px solid var(--color-mystic-500);
+  background: color-mix(in srgb, var(--color-mystic-800) 30%, transparent);
+}
+
+.tab-inactive {
+  color: var(--color-mystic-500);
+  border-bottom: 2px solid transparent;
+}
+.tab-inactive:hover {
+  color: var(--color-mystic-400);
+  border-color: var(--color-mystic-700);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.text-gold-glow {
+  text-shadow: 0 0 20px rgba(240, 192, 96, 0.5), 0 0 40px rgba(240, 192, 96, 0.2);
+}
