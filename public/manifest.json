@@ -1,0 +1,14 @@
+{
+  "name": "命理 - 探索你的命运密码",
+  "short_name": "命理",
+  "description": "八字排盘、紫微斗数、AI命理师",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08061a",
+  "theme_color": "#08061a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
