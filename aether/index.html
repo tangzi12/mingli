@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aether — Demystifying the Cosmos. Quantifying the Soul.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#08080b;--bg:#0b0b10;--panel:#0f0f16;--panel-2:#14141d;--raise:#191923;
+  --line:#1f1f2a;--line-soft:#17171f;
+  --ink:#ededf2;--ink-2:#9696a6;--ink-3:#5c5c6b;--ink-4:#3d3d49;
+  --accent:#8a7cf0;--accent-strong:#6f5fe6;--accent-soft:rgba(138,124,240,.12);
+  --good:#46c79a;--good-soft:rgba(70,199,154,.10);--warn:#e0795f;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;--serif:'Spectral',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65}
+::selection{background:var(--accent-soft);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(8,8,11,.7);border-bottom:1px solid var(--line)}
+nav .wrap{height:62px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:20px;height:20px;color:var(--accent)}
+.logo b{font-weight:600;letter-spacing:.34em;font-size:14px;padding-left:2px}
+.nav-links{display:flex;gap:30px;font-size:13.5px;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--accent);color:#0b0b10;font-weight:600;font-size:13px;padding:8px 16px;border-radius:8px;transition:background .18s}
+.nav-cta:hover{background:var(--accent-strong)}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:120px 0 90px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 70% at 50% -10%,rgba(138,124,240,.10),transparent 55%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(ellipse 60% 55% at 50% 35%,#000,transparent);pointer-events:none}
+.hero .badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2);border:1px solid var(--line);background:var(--panel);padding:6px 14px;border-radius:30px;margin-bottom:30px;position:relative;z-index:2}
+.hero .badge .d{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--good-soft)}
+h1{font-size:60px;line-height:1.04;font-weight:600;letter-spacing:-.03em;position:relative;z-index:2}
+h1 .it{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}
+.hero p.sub{font-size:18px;color:var(--ink-2);max-width:560px;margin:26px auto 0;position:relative;z-index:2;line-height:1.6}
+.hero-cta{display:flex;gap:14px;justify-content:center;margin-top:38px;position:relative;z-index:2}
+.btn{font-size:14.5px;font-weight:600;padding:13px 24px;border-radius:10px;transition:.18s;border:1px solid transparent}
+.btn.p{background:var(--accent);color:#0b0b10}.btn.p:hover{background:var(--accent-strong)}
+.btn.s{background:transparent;border-color:var(--line);color:var(--ink)}.btn.s:hover{border-color:var(--ink-4)}
+.hero .note{font-family:var(--mono);font-size:11px;color:var(--ink-4);margin-top:18px;position:relative;z-index:2;letter-spacing:.03em}
+
+/* section frame */
+section{padding:88px 0;border-top:1px solid var(--line-soft)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+h2{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.18}
+h2 .it{font-family:var(--serif);font-style:italic;color:var(--ink-2);font-weight:500}
+.lead{font-size:17px;color:var(--ink-2);max-width:640px;margin-top:18px;line-height:1.6}
+
+/* differentiation matrix */
+.matrix3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:44px}
+.m-cell{background:var(--panel);padding:30px 26px}
+.m-cell .gl{font-family:var(--serif);font-size:22px;color:var(--accent);margin-bottom:14px}
+.m-cell h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.m-cell p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+@media(max-width:780px){.matrix3{grid-template-columns:1fr}}
+
+/* engine rows */
+.engine{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:48px}
+.engine.flip .e-visual{order:-1}
+.engine + .engine{margin-top:80px}
+.e-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.engine h3{font-size:24px;font-weight:600;letter-spacing:-.01em;margin-bottom:14px}
+.engine p{color:var(--ink-2);font-size:15px;line-height:1.65}
+.e-visual{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+@media(max-width:780px){.engine,.engine.flip .e-visual{grid-template-columns:1fr;order:0}.engine{gap:24px}}
+
+/* mini chart visual */
+.mini-chart{width:200px;height:200px}
+.mini-readout{position:absolute;bottom:22px;left:22px;right:22px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:11px}
+.mini-readout .t{font-weight:600;color:#fff;font-size:11.5px;display:flex;justify-content:space-between;margin-bottom:4px}
+.mini-readout .t span{font-family:var(--mono);color:var(--warn)}
+.mini-readout p{color:var(--ink-3);font-size:10.5px;line-height:1.45}
+
+/* decision matrix visual */
+.dm{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dm .c{background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:12px}
+.dm .c.g{border-color:rgba(70,199,154,.3);background:var(--good-soft)}
+.dm .c.b{border-color:rgba(224,121,95,.3);background:rgba(224,121,95,.08)}
+.dm .d{font-family:var(--mono);font-size:10px;color:var(--ink-2)}
+.dm .s{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-top:7px;display:inline-block}
+.dm .s.g{color:var(--good)}.dm .s.b{color:var(--warn)}.dm .s.n{color:var(--ink-3)}
+
+/* report visual */
+.rep{width:100%;font-size:13px}
+.rep .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.rep h4{font-family:var(--serif);font-size:18px;color:#fff;font-weight:600;margin-bottom:10px;line-height:1.25}
+.rep p{color:var(--ink-2);font-size:12.5px;line-height:1.6;margin-bottom:10px}
+.rep .li{display:flex;gap:10px;margin-bottom:9px}.rep .ix{font-family:var(--mono);font-size:9px;color:var(--ink-4);padding-top:2px}
+.rep .li b{color:var(--ink)}
+
+/* api block */
+.api{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:34px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.api code{display:block;font-family:var(--mono);font-size:12.5px;background:var(--void);border:1px solid var(--line);border-radius:10px;padding:18px;color:var(--ink-2);line-height:1.8;white-space:pre;overflow-x:auto}
+.api .tk{color:var(--accent)}.api .st{color:var(--good)}
+@media(max-width:780px){.api{grid-template-columns:1fr;gap:24px}}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px 26px;display:flex;flex-direction:column}
+.tier.feature{border-color:var(--accent);background:linear-gradient(180deg,rgba(138,124,240,.06),var(--panel))}
+.tier .tn{font-size:14px;font-weight:600;letter-spacing:.02em}
+.tier.feature .tn{color:var(--accent)}
+.tier .tp{font-size:38px;font-weight:600;letter-spacing:-.02em;margin:16px 0 4px}
+.tier .tp small{font-size:14px;color:var(--ink-3);font-weight:400}
+.tier .td{font-size:13px;color:var(--ink-2);min-height:38px}
+.tier ul{list-style:none;margin:20px 0 24px;display:flex;flex-direction:column;gap:11px;flex:1}
+.tier li{font-size:13px;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
+.tier li svg{width:15px;height:15px;color:var(--accent);flex-shrink:0;margin-top:2px}
+.tier .tbtn{text-align:center;font-size:13.5px;font-weight:600;padding:11px;border-radius:9px;border:1px solid var(--line);color:var(--ink);transition:.18s}
+.tier .tbtn:hover{border-color:var(--ink-4)}
+.tier.feature .tbtn{background:var(--accent);color:#0b0b10;border-color:var(--accent)}
+.tier.feature .tbtn:hover{background:var(--accent-strong)}
+@media(max-width:780px){.tiers{grid-template-columns:1fr}}
+
+/* closing */
+.close{text-align:center;padding:100px 0}
+.close h2{font-size:42px}
+.close .it{font-family:var(--serif);font-style:italic;color:var(--accent);font-weight:500}
+
+footer{border-top:1px solid var(--line);padding:40px 0}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer .disc{font-size:12px;color:var(--ink-4);max-width:560px;line-height:1.55}
+@media(max-width:640px){h1{font-size:40px}.close h2{font-size:30px}h2{font-size:27px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.4" transform="rotate(30 12 12)"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg><b>AETHER</b></a>
+    <div class="nav-links"><a href="#engines">Engines</a><a href="#timing">Timing</a><a href="#api">API</a><a href="#pricing">Pricing</a></div>
+    <a class="nav-cta" href="app.html">Open Aether</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="badge"><span class="d"></span>Aether 2.0 Pro · Deep Insight Engine</span>
+    <h1>Demystifying the cosmos.<br><span class="it">Quantifying</span> the soul.</h1>
+    <p class="sub">A metaphysics intelligence built like a research instrument — not a horoscope app. Long-context reasoning across psychological, Hellenistic and Human Design models.</p>
+    <div class="hero-cta">
+      <a class="btn p" href="app.html">Generate your baseline</a>
+      <a class="btn s" href="#engines">See how it reasons</a>
+    </div>
+    <div class="note">NO CREDIT CARD FOR THE BASELINE READING</div>
+  </div>
+</header>
+
+<!-- DIFFERENTIATION -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why Aether is different</div>
+    <h2>Most astrology apps <span class="it">label</span> you.<br>Aether reasons about you.</h2>
+    <p class="lead">Co–Star and the rest reduce a chart to daily tags and sun-sign clichés. Aether holds your full configuration in context and reasons across systems — the way an analyst works through a problem, not a fortune cookie.</p>
+    <div class="matrix3">
+      <div class="m-cell"><div class="gl">ψ</div><h3>Psychological astrology</h3><p>Reads placements as patterns of disposition and defense — the inner mechanics, not the prophecy.</p></div>
+      <div class="m-cell"><div class="gl">⌖</div><h3>Hellenistic technique</h3><p>Classical timing methods — profections, sect, time-lords — for structural rigor under the surface.</p></div>
+      <div class="m-cell"><div class="gl">◈</div><h3>Human Design overlay</h3><p>A second lens on decision-making and energy type, cross-validated against the natal geometry.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINES -->
+<section id="engines">
+  <div class="wrap">
+    <div class="eyebrow">The engines</div>
+    <h2>Four engines. One reasoning core.</h2>
+
+    <div class="engine">
+      <div>
+        <div class="e-tag">Engine 01 · Birth Chart Synthesis</div>
+        <h3>A soul audit, not a sun sign.</h3>
+        <p>Enter your coordinates of origin and Aether maps the underlying geometry of your chart — temperament, tension, latent potential — as a long-form, citable report. Hover any term; click any aspect to expand its mechanism.</p>
+      </div>
+      <div class="e-visual">
+        <svg class="mini-chart" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="var(--line)"/><circle cx="100" cy="100" r="68" fill="none" stroke="var(--line-soft)"/><circle cx="100" cy="100" r="40" fill="none" stroke="var(--line)" stroke-dasharray="2 4"/>
+          <polygon points="100,32 156,135 44,135" fill="none" stroke="var(--good)" stroke-width="1" stroke-opacity=".5"/>
+          <line x1="100" y1="32" x2="100" y2="168" stroke="var(--warn)" stroke-width="1.2" stroke-dasharray="2 3" stroke-opacity=".7"/>
+          <line x1="100" y1="32" x2="156" y2="70" stroke="var(--accent)" stroke-opacity=".6"/>
+          <g fill="var(--ink-4)" font-family="Spectral,serif" font-size="9" text-anchor="middle"><text x="100" y="20">♑</text><text x="180" y="103">♈</text><text x="100" y="190">♋</text><text x="22" y="103">♎</text></g>
+          <circle cx="100" cy="32" r="3" fill="#fff"/><circle cx="100" cy="168" r="3" fill="var(--warn)"/><circle cx="156" cy="70" r="3" fill="var(--accent)"/>
+        </svg>
+        <div class="mini-readout"><div class="t">Sun opposite Pluto <span>180°</span></div><p>Identity meets power. The growth edge: authority without grip.</p></div>
+      </div>
+    </div>
+
+    <div class="engine flip">
+      <div>
+        <div class="e-tag">Engine 02 · Transit &amp; Progression</div>
+        <h3>What the sky is doing to your structure.</h3>
+        <p>Beyond “Mercury is retrograde.” Aether traces how live transits land on your specific placements — and what they ask of your career, capital and relationships at the level that actually moves.</p>
+      </div>
+      <div class="e-visual">
+        <div class="rep">
+          <div class="k">Saturn–MC Transit · Assessment</div>
+          <h4>A consolidation of authority, not a setback</h4>
+          <p>Saturn over the Midheaven tests the load-bearing parts of your public structure and removes what can't hold weight.</p>
+          <div class="li"><span class="ix">01</span><span><b>Pressure point.</b> Natal Sun squared by transiting Uranus — restructure shared capital.</span></div>
+          <div class="li"><span class="ix">02</span><span><b>Window.</b> Peak Jul 12 – Aug 4. For deliberate change, not waiting.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="engine">
+      <div>
+        <div class="e-tag">Engine 03 · Synastry Matrix</div>
+        <h3>Map the energy between two charts.</h3>
+        <p>For a co-founder, a board seat, or a relationship: Aether models the points of contact and friction between two configurations — where the alignment compounds, and where it quietly drains.</p>
+      </div>
+      <div class="e-visual">
+        <svg class="mini-chart" viewBox="0 0 200 200">
+          <circle cx="78" cy="100" r="58" fill="none" stroke="var(--accent)" stroke-width="1" stroke-opacity=".55"/>
+          <circle cx="122" cy="100" r="58" fill="none" stroke="var(--good)" stroke-width="1" stroke-opacity=".55"/>
+          <line x1="78" y1="62" x2="122" y2="138" stroke="var(--accent)" stroke-opacity=".5"/>
+          <line x1="78" y1="138" x2="122" y2="62" stroke="var(--warn)" stroke-opacity=".5" stroke-dasharray="2 3"/>
+          <circle cx="78" cy="62" r="3" fill="var(--accent)"/><circle cx="122" cy="62" r="3" fill="var(--good)"/><circle cx="78" cy="138" r="3" fill="var(--accent)"/><circle cx="122" cy="138" r="3" fill="var(--good)"/>
+        </svg>
+        <div class="mini-readout"><div class="t">Composite overlap <span style="color:var(--good)">72%</span></div><p>Strong mental synastry; watch Mars–Saturn for control friction.</p></div>
+      </div>
+    </div>
+
+    <div class="engine flip">
+      <div>
+        <div class="e-tag">Engine 04 · Cross-System Nexus</div>
+        <h3>The hidden engine, for advanced users.</h3>
+        <p>Cross-validate the Western chart against Eastern cyclical time models — a multi-frame read where independent systems either confirm or contradict a turning point. Confluence is the signal; disagreement is the warning.</p>
+      </div>
+      <div class="e-visual">
+        <div class="dm">
+          <div class="c g"><div class="d">JUL 12–15</div><span class="s g">Confluence ✓</span></div>
+          <div class="c"><div class="d">JUL 19–21</div><span class="s n">Mixed signal</span></div>
+          <div class="c b"><div class="d">AUG 01–04</div><span class="s b">Both warn ⚠</span></div>
+          <div class="c g"><div class="d">AUG 22–25</div><span class="s g">Confluence ✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMING -->
+<section id="timing">
+  <div class="wrap">
+    <div class="eyebrow">Time-Optimized Decisions</div>
+    <h2>Timing, read like a <span class="it">volatility calendar</span>.</h2>
+    <p class="lead">For founders and investors who already think in windows. Aether scores upcoming dates for high-conviction action — contract signings, launches, capital moves — as risk-adjusted timing, never as superstition.</p>
+    <div class="api" style="margin-top:40px;grid-template-columns:1fr">
+      <div class="dm" style="grid-template-columns:repeat(4,1fr)">
+        <div class="c g"><div class="d">JUL 12–15</div><span class="s g">Favorable · 0.81</span></div>
+        <div class="c"><div class="d">JUL 19–21</div><span class="s n">Neutral · 0.50</span></div>
+        <div class="c b"><div class="d">AUG 01–04</div><span class="s b">Volatile · 0.78</span></div>
+        <div class="c g"><div class="d">AUG 22–25</div><span class="s g">Favorable · 0.74</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
+<section id="api">
+  <div class="wrap">
+    <div class="eyebrow">Cosmic API</div>
+    <h2>Pipe your chart into your workflow.</h2>
+    <div class="api">
+      <div>
+        <p style="color:var(--ink-2);font-size:15px;line-height:1.65">Push your daily macro-energy index into Notion, Google Calendar, or your own tools. Each morning, Aether posts the day's read where you already work.</p>
+      </div>
+      <code><span class="st">GET</span> /v1/daily/<span class="tk">energy-index</span>
+
+{
+  "date": "2026-07-12",
+  "index": <span class="st">0.81</span>,
+  "window": <span class="tk">"favorable"</span>,
+  "drivers": [<span class="tk">"Mercury trine Jupiter"</span>]
+}</code>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="eyebrow">Pricing</div>
+    <h2>From a single reading to a standing edge.</h2>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tn">Baseline</div>
+        <div class="tp">$0</div>
+        <div class="td">One full birth-chart synthesis to see how Aether reasons.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Birth Chart Synthesis report</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Interactive natal chart</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>10 follow-up questions</li>
+        </ul>
+        <a class="tbtn" href="app.html">Start free</a>
+      </div>
+      <div class="tier feature">
+        <div class="tn">The Syndicate</div>
+        <div class="tp">$39<small> / month</small></div>
+        <div class="td">For operators who time decisions. Long-context reasoning across your whole history.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>All four engines, unlimited</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>200k-token context — feed years of journals or filings</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Time-Optimized Decisions calendar</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Cosmic API + calendar sync</li>
+        </ul>
+        <a class="tbtn" href="app.html">Join The Syndicate</a>
+      </div>
+      <div class="tier">
+        <div class="tn">Private Office</div>
+        <div class="tp">$50<small>+ / month</small></div>
+        <div class="td">Bespoke depth for advisors, funds and high-stakes timing.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Everything in The Syndicate</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Multi-chart Synastry for teams &amp; deals</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Cross-System Nexus (hidden engine)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Priority model &amp; private inference</li>
+        </ul>
+        <a class="tbtn">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap">
+    <h2>Your cosmic baseline <span class="it">awaits.</span></h2>
+    <p class="lead" style="margin:18px auto 32px">We don't predict events. We map the underlying geometry of your potential — and tell you when to act on it.</p>
+    <a class="btn p" href="app.html" style="font-size:15px">Initialize your reading</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.4" transform="rotate(30 12 12)"/></svg><b>AETHER</b></a>
+    <p class="disc">Aether is an analytical and reflective tool. Its readings are interpretive frameworks for self-understanding and decision-timing — not financial, medical, legal or psychological advice, and not deterministic prediction.</p>
+  </div>
+</footer>
+
+</body>
+</html>
