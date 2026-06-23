@@ -9,6 +9,7 @@ const NAV = [
   { path: "/", label: "首页", icon: "🏠" },
   { path: "/bazi", label: "八字", icon: "🔮" },
   { path: "/ziwei", label: "紫微", icon: "⭐" },
+  { path: "/meihua", label: "梅花", icon: "🌸" },
   { path: "/community", label: "社区", icon: "💬" },
   { path: "/profile", label: "我的", icon: "👤" },
 ];

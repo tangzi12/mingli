@@ -69,11 +69,11 @@ export default function ProfilePage() {
             {(charts as any[]).map((chart: any) => (
               <div key={chart.id} className="card-mystic p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-xl">{chart.type === "bazi" ? "🔮" : "⭐"}</span>
+                  <span className="text-xl">{chart.type === "bazi" ? "🔮" : chart.type === "ziwei" ? "⭐" : "🌸"}</span>
                   <div>
                     <p className="text-sm font-medium text-mystic-300">{chart.name}</p>
                     <p className="text-xs text-mystic-500">
-                      {chart.type === "bazi" ? "八字" : "紫微"} · {chart.input?.year}-{chart.input?.month}-{chart.input?.day}
+                      {chart.type === "bazi" ? "八字" : chart.type === "ziwei" ? "紫微" : "梅花"} · {chart.input ? `${chart.input.year}-${chart.input.month}-${chart.input.day}` : new Date(chart.createdAt).toLocaleDateString("zh-CN")}
                     </p>
                   </div>
                 </div>

@@ -25,12 +25,15 @@ export default function HomePage() {
           八字排盘 · 紫微斗数 · AI命理师<br />
           <span className="text-sm text-mystic-500">千年命理智慧，为你揭示人生轨迹</span>
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/bazi" className="btn-primary text-center text-lg px-10 py-4 inline-block">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
+          <Link href="/bazi" className="btn-primary text-center text-lg px-8 py-4 inline-block">
             🔮 八字排盘
           </Link>
-          <Link href="/ziwei" className="btn-ghost text-center text-lg px-10 py-4 inline-block">
+          <Link href="/ziwei" className="btn-ghost text-center text-lg px-8 py-4 inline-block">
             ⭐ 紫微斗数
+          </Link>
+          <Link href="/meihua" className="btn-ghost text-center text-lg px-8 py-4 inline-block">
+            🌸 梅花易数
           </Link>
         </div>
       </section>
@@ -40,11 +43,11 @@ export default function HomePage() {
           <h2 className="text-lg font-semibold text-mystic-300 mb-4">📋 最近排盘</h2>
           <Link href="/result" className="card-mystic p-5 flex items-center justify-between hover:border-mystic-500/50 transition-colors block">
             <div className="flex items-center gap-4">
-              <span className="text-2xl">{(recentChart as any).type === "bazi" ? "🔮" : "⭐"}</span>
+              <span className="text-2xl">{(recentChart as any).type === "bazi" ? "🔮" : (recentChart as any).type === "ziwei" ? "⭐" : "🌸"}</span>
               <div>
                 <p className="text-mystic-200 font-semibold">{(recentChart as any).name || "未命名"}</p>
                 <p className="text-mystic-500 text-sm">
-                  {(recentChart as any).type === "bazi" ? "八字" : "紫微"} ·{" "}
+                  {(recentChart as any).type === "bazi" ? "八字" : (recentChart as any).type === "ziwei" ? "紫微" : "梅花"} ·{" "}
                   {new Date((recentChart as any).createdAt).toLocaleDateString("zh-CN")}
                 </p>
               </div>
@@ -60,6 +63,7 @@ export default function HomePage() {
           {[
             { icon: "🔮", title: "八字排盘", desc: "精准四柱八字，十神、大运、流年全解", href: "/bazi" },
             { icon: "⭐", title: "紫微斗数", desc: "十二宫位、十四主星、四化飞星", href: "/ziwei" },
+            { icon: "🌸", title: "梅花易数", desc: "时间/数字起卦，体用生克断吉凶", href: "/meihua" },
             { icon: "🤖", title: "AI命理师", desc: "智能解读命盘，解答你的人生疑问", href: "/ai" },
             { icon: "💬", title: "命理社区", desc: "分享命盘，和同好交流探讨", href: "/community" },
             { icon: "📊", title: "排盘历史", desc: "保存所有排盘记录，随时回顾", href: "/profile" },

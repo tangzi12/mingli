@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getCharts } from "@/lib/store";
 import BaziResult from "@/components/BaziResult";
 import ZiweiResult from "@/components/ZiweiResult";
+import MeihuaResult from "@/components/MeihuaResult";
 import AiChat from "@/components/AiChat";
 
 export default function ResultPage() {
@@ -16,10 +17,18 @@ export default function ResultPage() {
     const charts = getCharts();
     if (!charts.length) { router.push("/"); return; }
     setChart(charts[0]);
-    setTab(charts[0].type === "ziwei" ? "chart" : "chart");
+    setTab("chart");
   }, [router]);
 
   if (!chart) return null;
+
+  const type = (chart as any).type;
+  const chartLabel = type === "bazi" ? "🔮 八字命盘" : type === "ziwei" ? "⭐ 紫微命盘" : "🌸 梅花卦象";
+  const tabs = [
+    { id: "chart", label: chartLabel },
+    ...(type === "meihua" ? [] : [{ id: "luck", label: "📅 大运流年" }]),
+    { id: "ai", label: "🤖 AI解读" },
+  ];
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 pb-20">
@@ -32,11 +41,7 @@ export default function ResultPage() {
       </div>
 
       <div className="flex border-b border-mystic-800/50 mb-6">
-        {[
-          { id: "chart", label: (chart as any).type === "bazi" ? "🔮 八字命盘" : "⭐ 紫微命盘" },
-          { id: "luck", label: "📅 大运流年" },
-          { id: "ai", label: "🤖 AI解读" },
-        ].map(t => (
+        {tabs.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`px-5 py-3 text-sm font-medium transition-all ${tab === t.id ? "tab-active" : "tab-inactive"}`}>
             {t.label}
@@ -44,9 +49,10 @@ export default function ResultPage() {
         ))}
       </div>
 
-      {tab === "chart" && (chart as any).type === "bazi" && <BaziResult data={(chart as any).result} lunar={(chart as any).lunar} />}
-      {tab === "chart" && (chart as any).type === "ziwei" && <ZiweiResult data={(chart as any).result} />}
-      {tab === "luck" && <LuckPillarsView data={(chart as any).result} type={(chart as any).type} />}
+      {tab === "chart" && type === "bazi" && <BaziResult data={(chart as any).result} lunar={(chart as any).lunar} />}
+      {tab === "chart" && type === "ziwei" && <ZiweiResult data={(chart as any).result} />}
+      {tab === "chart" && type === "meihua" && <MeihuaResult data={(chart as any).result} question={(chart as any).question} />}
+      {tab === "luck" && <LuckPillarsView data={(chart as any).result} type={type} />}
       {tab === "ai" && <AiChat chart={chart as any} />}
     </div>
   );
